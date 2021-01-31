@@ -23,7 +23,7 @@ Or make a shell script to launch the file
 **~/bin/dog**
 ```sh
 #!/bin/bash
-python3 dogmodule $@
+python3 ~/bin/dogmodule $@
 ```
 
 ## Usage
