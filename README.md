@@ -85,3 +85,8 @@ If you want to use another file than "dog.json" or another folder than "dog" tha
 dog example --file other.json --folder other
 ```
 Will look for the example command in other/other.json
+
+## Why "dog"?
+Well if people can name there unix commands after animals: [cat](https://en.wikipedia.org/wiki/Cat_(Unix)). Then I want to name mine after a dog. Because dogs are the best
+
+(I know the cat from the cat command doesn't stand for the animal)
