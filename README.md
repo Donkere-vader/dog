@@ -16,14 +16,14 @@ mv dogmodule ~/bin
 
 Either add an alias to your .bash_aliases
 ```
-alias dog="p ~/bin/dog"
+alias dog="python3 ~/bin/dogmodule"
 ```
 Or make a shell script to launch the file
 
 **~/bin/dog**
 ```sh
 #!/bin/bash
-p dog $@
+python3 dogmodule $@
 ```
 
 ## Usage
