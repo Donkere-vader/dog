@@ -23,7 +23,10 @@ class Dog:
         return json.load(open(json_file, 'r'))
 
     def command(self, command):
-        command = self.commands[command]
+        try:
+            command = self.commands[command]
+        except KeyError:
+            raise Exception(f"No command '{command}' found in {self.file} or {self.folder}/{self.file}")
 
         if type(command) == dict:
             command = f"{self.folder}/{command['file']}"
