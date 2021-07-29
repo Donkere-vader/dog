@@ -17,6 +17,13 @@ parser.add_argument(
     default='dog.yaml',
     help="If you don't want to use the regular dog.yaml file sepify another file here."
 )
+parser.add_argument(
+    "-v", "--verbose",
+    action="store_const",
+    const=True,
+    default=False,
+    help="Display extra information while running code"
+)
 
 arguments = parser.parse_args()
 

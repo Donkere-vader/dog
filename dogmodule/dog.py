@@ -4,8 +4,9 @@ import yaml
 
 
 class Dog:
-    def __init__(self, command, file):
+    def __init__(self, command, file, verbose):
         self.file = file
+        self.verbose = verbose
 
         if self.file not in os.listdir() + os.listdir(os.environ['HOME']):
             print(f"Couldn't find '{self.file}' in current working directory or '{os.environ['HOME']}'")
@@ -22,7 +23,7 @@ class Dog:
         self.run_command(command)
 
     def run_command(self, command):
-        print(f"Running DOG command: {command}")
+        if self.verbose: print(f"Running DOG command: {command}")
 
         if command not in self.info['commands']:
             print(f"Command '{command}' not found in dog file: '{self.file}'")
@@ -34,6 +35,7 @@ class Dog:
             code.remove("")
 
         for line in code:
-            print()
-            print("$ " + line.replace('\n', '\\n'))
+            if self.verbose:
+                print()
+                print("$ " + line.replace('\n', '\\n'))
             os.system(line)
