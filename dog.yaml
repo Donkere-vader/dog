@@ -1,0 +1,10 @@
+author: Donkere Vader
+
+commands:
+    test:
+        code:
+            "
+            echo \"this is a \ntest\";
+            mkdir test;
+            echo \"this is a test\" > test/test.txt;
+            "

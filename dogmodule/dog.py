@@ -1,34 +1,39 @@
 import os
-import json
+import yaml
+
 
 
 class Dog:
-    def __init__(self, file="dog.json", folder="dog"):
-        files = os.listdir()
+    def __init__(self, command, file):
+        self.file = file
 
-        self.file, self.folder = file, folder
+        if self.file not in os.listdir() + os.listdir(os.environ['HOME']):
+            print(f"Couldn't find '{self.file}' in current working directory or '{os.environ['HOME']}'")
+            exit(1)
 
-        # check if dog is instanciated
-        if self.file in files:
-            file_loc = self.file
-        elif self.folder in files and os.path.isdir(self.folder) and self.file in os.listdir(self.folder):
-            file_loc = f"{self.folder}/{self.file}"
-        else:
-            print(f"No {self.file} or {self.folder}/{self.file} file found.")
-            exit()
+        self.info: dict = {}
+        with open(self.file, 'r') as f:
+            self.info: dict = yaml.load(f, Loader=yaml.FullLoader)
+        
+        if 'commands' not in self.info:
+            print(f"Please supply commands in the '{self.file}' dog file")
+            exit(1)
 
-        self.commands = self.load_commands(file_loc)['commands']
+        self.run_command(command)
 
-    def load_commands(self, json_file):
-        return json.load(open(json_file, 'r'))
+    def run_command(self, command):
+        print(f"Running DOG command: {command}")
 
-    def command(self, command):
-        try:
-            command = self.commands[command]
-        except KeyError:
-            raise Exception(f"No command '{command}' found in {self.file} or {self.folder}/{self.file}")
+        if command not in self.info['commands']:
+            print(f"Command '{command}' not found in dog file: '{self.file}'")
+            exit(1)
 
-        if type(command) == dict:
-            command = f"{self.folder}/{command['file']}"
+        code = [line.strip() for line in str(self.info['commands'][command]['code']).split(";")]
 
-        os.system(command)
+        while "" in code:
+            code.remove("")
+
+        for line in code:
+            print()
+            print("$ " + line.replace('\n', '\\n'))
+            os.system(line)

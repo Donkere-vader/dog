@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+
+from dogmodule import Dog
+from argparse import ArgumentParser
+
+parser = ArgumentParser("dog", description="Easy way to set up some commands for a working env")
+parser.add_argument(
+    'command',
+    nargs="?",
+    default=None,
+    help="The command (described in dog.yaml or another (user specified) file) that you want to run."
+)
+parser.add_argument(
+    "--file",
+    action='store',
+    type=str,
+    default='dog.yaml',
+    help="If you don't want to use the regular dog.yaml file sepify another file here."
+)
+
+arguments = parser.parse_args()
+
+dog = Dog(**arguments.__dict__)
