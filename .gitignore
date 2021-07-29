@@ -5,4 +5,4 @@ __pycache__
 .vscode
 
 # Project
-dog.json
+dog.yaml
