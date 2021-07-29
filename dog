@@ -11,6 +11,13 @@ parser.add_argument(
     help="The command (described in dog.yaml or another (user specified) file) that you want to run."
 )
 parser.add_argument(
+    "--list",
+    action="store_const",
+    const=True,
+    default=False,
+    help="List all the available commands"
+)
+parser.add_argument(
     "--file",
     action='store',
     type=str,

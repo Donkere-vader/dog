@@ -8,3 +8,4 @@ commands:
             mkdir test;
             echo \"this is a test\" > test/test.txt;
             "
+        description: Run some tests
